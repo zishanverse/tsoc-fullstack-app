@@ -7,16 +7,16 @@ export const actions = {
     
     
 
-const neucron = new NeucronSDK();
+    const neucron = new NeucronSDK();
 
-const authModule = neucron.authentication;
-const walletModule = neucron.wallet;
+    const authModule = neucron.authentication;
+    const walletModule = neucron.wallet;
 
 //const signUpResponse = await authModule.signUp({ email: "cloudzishan@gmail.com", password: "string" });
 //console.log(signUpResponse);
 
-const loginResponse = await authModule.login({ email: "cloudzishan@gmail.com", password: "string" });
-console.log(loginResponse);
+    const loginResponse = await authModule.login({ email: data.email, password: data.password });
+    console.log(loginResponse);
 
 //const walletKeys = await walletModule.getWalletKeys({});
 //console.log(walletKeys);
