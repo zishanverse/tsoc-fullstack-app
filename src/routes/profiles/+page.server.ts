@@ -64,21 +64,22 @@ async function seed() {
 /** @type {import('./$types').Actions} */
 export const actions = {
 	
-  // update: async ({ request }) => {
-  //   const data = await request.formData();
-  //   const db = createPool({ connectionString: POSTGRES_URL })
-  //   const client = await db.connect();
+  update: async ({ request }) => {
+    const data = await request.formData();
+    const db = createPool({ connectionString: POSTGRES_URL })
+    const client = await db.connect();
 
-  //   const email = data.get('email');
-	// 	const name = data.get('name');
+    const email = data.get('email');
+		const name = data.get('name');
+		const id = data.get('id');
 
-  //   const updateUser = await client.sql`
-  //   UPDATE names
-  //   SET email = ${email}, name = ${name}
-  //   WHERE     ;`
+    const updateUser = await client.sql`
+    UPDATE names
+    SET email = ${email}, name = ${name}
+    WHERE id = ${id};`
 	
-	// 	return { success: true };
-	// },
+		return { success: true };
+	},
 
   delete: async ({ request }) => {
     const data = await request.formData();

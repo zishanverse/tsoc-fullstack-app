@@ -22,12 +22,22 @@
 						<p class="font-medium pl-5 text-gray-500 pt-0">{user.email}</p>                        
 					</div>
 				</div>
+				<div class="flex justify-between w-70">
                 <form method="POST" action="/profiles?/delete">
                 <input type="hidden" name="id" id="id" value={user.id}>
                 <button type="submit">
                     <img class="w-4 float-right" src="./trash-can.svg" alt="delete"/>
                 </button>
                 </form>
+				<form method="PUT" action="/profiles?/update">
+					<input type="hidden" name="id" id="id" value={user.id}>
+					<input type="hidden" name="email" id="email" value={user.email}>
+					<input type="hidden" name="name" id="name" value={user.name}>
+					<button type="submit">
+						<img class="w-4 float-right" src="https://cdn3.vectorstock.com/i/1000x1000/70/07/update-icon-on-white-background-flat-style-vector-20967007.jpg" alt="update"/>
+					</button>
+					</form>
+				</div>
 			</div>
 		{/each}
 	</div>
