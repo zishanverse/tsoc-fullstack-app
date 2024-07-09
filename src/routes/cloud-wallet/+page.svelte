@@ -147,7 +147,7 @@
       </button>
     </div>
   </form>
-  {#if form?.success}
+  {#if form?.paid}
     <!-- this message is ephemeral; it exists because the page was rendered in
 		   response to a form submission. it will vanish if the user reloads -->
     <p class="pt-2">Payment was Successful, <a href="https://whatsonchain.com/tx/{form?.payment}">transaction</a>!</p>

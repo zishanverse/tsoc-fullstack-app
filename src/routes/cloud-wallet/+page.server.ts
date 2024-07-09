@@ -4,66 +4,18 @@ import NeucronSDK from "neucron-sdk";
 export const actions = {
     login: async ({request}) => {
         const data = await request.formData();
-    
-    
 
     const neucron = new NeucronSDK();
 
     const authModule = neucron.authentication;
     const walletModule = neucron.wallet;
-
-//const signUpResponse = await authModule.signUp({ email: "cloudzishan@gmail.com", password: "string" });
-//console.log(signUpResponse);
-
     const loginResponse = await authModule.login({ email: data.get("email"), password: data.get("password") });
     console.log(loginResponse);
 
-//const walletKeys = await walletModule.getWalletKeys({});
-//console.log(walletKeys);
+    const DefaultWalletBalance = await walletModule.getWalletBalance({});
+    //console.log(DefaultWalletBalance);
 
-
-// For Default wallet balance
-const DefaultWalletBalance = await walletModule.getWalletBalance({});
-console.log(DefaultWalletBalance);
-
-//const addresses = await walletModule.getAddressesByWalletId({});
-//console.log(addresses);
-//
-//const options = {
-//    outputs: [
-//      {
-//        address: 'sales@timechainlabs.io',
-//        note: 'gurudakshina',
-//        amount: 10
-//      }
-//    ]
-//  };
-//
-//const payResponse = await neucron.pay.txSpend(options)
-//console.log(payResponse)
-//
-//const walletHistory = await walletModule.getWalletHistory({ });
-//console.log(walletHistory);
-
-
-// console.log('initiating wallet')
-//const walletCreation1 = await walletModule.createWallet({ walletName: 'zishan' });
-//console.log(walletCreation1);
-
-//const walletBalance = await walletModule.getWalletBalance({ walletId: walletCreation1.walletID });
-//console.log(walletBalance);
-
-//const addresses = await walletModule.getAddressesByWalletId({ walletId: walletCreation1.walletID });
-//console.log(addresses);
-
-// const mnemonic = await walletModule.getMnemonic({ walletId: walletCreation1.walletID });
-// console.log(mnemonic);
-
-// const allUtxos = await walletModule.getAllUtxos({ walletId: walletCreation1.walletID });
-// console.log(allUtxos);
-
-// const xPubKeys = await walletModule.getXPubKeys({ walletId: walletCreation1.walletID });
-// console.log(xPubKeys); 
+ 
 
     return {success: true, balance: DefaultWalletBalance.data.balance.summary}
     },
@@ -79,7 +31,7 @@ console.log(DefaultWalletBalance);
 
 
     const loginResponse = await authModule.login({ email: data.get("email"), password: data.get("password") });
-    console.log(loginResponse);
+    //console.log(loginResponse);
 
     
 
@@ -94,9 +46,14 @@ console.log(DefaultWalletBalance);
         ]
       };
 
-    const payResponse = await neucron.pay.txSpend(options)
-    console.log(payResponse)
-
-    return {success: true, payment: payResponse.data.txid}
+      let payResponse;
+      try {
+        payResponse = await neucron.pay.txSpend(options);
+        console.log(payResponse);
+        return { paid: true, payment: payResponse.data.txid };
+      } catch (error) {
+        console.log(error.message);
+        return {paid : false, payment : error.message}
+      }
     }
-};
+}

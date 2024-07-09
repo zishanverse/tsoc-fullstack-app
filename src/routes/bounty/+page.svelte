@@ -85,7 +85,7 @@
           </button>
         </div>
       </form>
-      {#if form?.success}
+      {#if form?.unlocked}
         <p class="pt-2">Bounty was unlocked successfully: <a href={'https://whatsonchain.com/tx/'+form?.tx}>Transaction Link!</a></p>
       {/if}
     </div>
