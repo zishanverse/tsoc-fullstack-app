@@ -76,8 +76,7 @@ console.log(DefaultWalletBalance);
     const authModule = neucron.authentication;
     const walletModule = neucron.wallet;
 
-//const signUpResponse = await authModule.signUp({ email: "cloudzishan@gmail.com", password: "string" });
-//console.log(signUpResponse);
+
 
     const loginResponse = await authModule.login({ email: data.get("email"), password: data.get("password") });
     console.log(loginResponse);
